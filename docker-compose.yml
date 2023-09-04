@@ -1,0 +1,24 @@
+version: "3.4"
+services:
+  react:
+    build:
+      context: .
+      dockerfile: docker/local/api/Dockerfile
+    image: unluer-tech:latest
+    container_name: unluer-tech
+    stdin_open: true
+    tty: true
+    restart: always
+    volumes:
+      - ./public:/app/public:rw
+      - ./src:/app/src:rw
+      - ./.env:/app/.env:rw
+      - ./index.html:/app/index.html:rw
+    ports:
+      - "9802:5173"
+#      - "9802:80"
+
+networks:
+  default:
+    external:
+      name: local-network
